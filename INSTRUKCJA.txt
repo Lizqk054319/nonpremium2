@@ -1,0 +1,102 @@
+ZORZA LAUNCHER – wersja próbna
+==============================
+
+URUCHAMIANIE
+------------
+1. Rozpakuj cały folder ZorzaLauncher (np. na Pulpit).
+2. Kliknij dwa razy plik  uruchom.bat
+   - za pierwszym razem doinstaluje biblioteki (kilkanaście sekund),
+   - otworzy się okno launchera.
+3. Czarnego okienka konsoli nie zamykaj, dopóki używasz launchera.
+
+Dane launchera (gra, profile, ustawienia) są w:  %APPDATA%\ZorzaLauncher
+Każdy profil ma własny folder w  instances\<profil>  (mody, paczki zasobów, shadery, światy).
+Dane logowania (accounts.json) są zaszyfrowane przez Windows – da się je odczytać tylko
+na tym komputerze i tym koncie Windows. Hasła ani e-maila launcher w ogóle nie zna.
+
+PROFILE
+-------
+Strzałka obok "Graj" -> lista profili, "Dodaj profil", "Edytuj profil", "Napraw instalację".
+- Stwórz własny profil: nazwa, wersja (od 1.20.1 wzwyż), Fabric albo Vanilla, RAM.
+- Dodaj gotowy profil: wklejasz kod ZORZA-... od znajomego (w edycji profilu: "Kopiuj kod profilu").
+- Przenieś z innego launchera: oficjalny launcher, Modrinth App, Prism/MultiMC, Lunar Client.
+  Pliki są kopiowane – w starym launcherze nic się nie zmienia.
+Usunięty profil trafia do folderu  usuniete  w folderze launchera (można go odzyskać).
+
+PROFILE I MODY
+--------------
+Zakładka Profile (ikonka kostki): karty profili z RAM-em, czasem gry i ostatnim uruchomieniem.
+"Mody" na karcie otwiera stronę profilu: Ogólne, Mody, Światy, Paczki zasobów, Shadery.
+Na dole listy modów są "Mody wbudowane" (Fabric API, Sodium, Sodium Extra, Lithium, FerriteCore,
+Entity Culling, ImmediatelyFast) – pobierają się same przy uruchomieniu gry w profilach z Fabric.
+Listę możesz zmienić w launcher.py (MODY_WBUDOWANE). Wersje gry: od 1.8.9 (Fabric działa od 1.14).
+
+SKINY
+-----
+Zakładka Skiny: "Wgraj skin" (PNG 64x64), wybierz model (Klasyczny/Smukły) i kliknij Zastosuj.
+Z kontem Microsoft skin zmienia się też w grze. Bez konta – tylko w launcherze.
+
+TŁO, KOLOR, JĘZYK, LOGI
+-----------------------
+Tło: przycisk z obrazkiem w prawym górnym rogu ekranu startowego.
+Ustawienia: język (PL/EN/DE/UK/ES), kolor launchera, usuwanie starych logów (7/14/30/90 dni).
+Co nowego: lista NOWOSCI w launcher.py (pokazuje się w karcie "Nowość").
+
+NAZWA LAUNCHERA
+---------------
+W pliku launcher.py zmień linijkę:  NAZWA_LAUNCHERA = "Zorza"
+
+
+LOGOWANIE MICROSOFT – JEDNORAZOWA KONFIGURACJA
+----------------------------------------------
+Każdy launcher musi mieć własny identyfikator aplikacji Microsoft (to darmowe).
+
+1. Wejdź na  https://portal.azure.com  i zaloguj się kontem Microsoft.
+2. Wyszukaj "App registrations" (Rejestracje aplikacji) -> "New registration".
+3. Wypełnij:
+   - Name: np. Zorza Launcher
+   - Supported account types: "Personal Microsoft accounts only"
+     (albo opcję z kontami organizacji ORAZ osobistymi)
+   - Redirect URI: wybierz "Public client/native (mobile & desktop)"
+     i wpisz dokładnie:   http://localhost:47615/callback
+4. Kliknij Register. Skopiuj "Application (client) ID".
+5. W pliku launcher.py wklej go tutaj:
+       AZURE_CLIENT_ID = "tu-wklej-id"
+6. Nowe aplikacje muszą dostać zgodę Mojanga na dostęp do Minecrafta.
+   Wypełnij formularz:  https://aka.ms/mce-reviewappid
+   (podajesz tam swój Client ID). Zatwierdzenie może potrwać kilka dni.
+   Dopóki nie przyjdzie zgoda, logowanie zakończy się błędem.
+
+Launcher nigdy nie widzi e-maila ani hasła – logujesz się na stronie Microsoftu.
+Na komputerze zapisuje tylko nick, UUID i token logowania (można wyłączyć w Ustawieniach).
+
+
+STATUS NA DISCORDZIE ("Zora Client")
+-------------------------------------
+1. Wejdź na  https://discord.com/developers/applications  i kliknij "New Application".
+2. Nazwa:  Zora Client   (ta nazwa pokazuje się na Discordzie jako "Gra").
+3. Na stronie aplikacji skopiuj "Application ID".
+4. Wejdź w "Rich Presence" -> "Art Assets" -> "Add Image(s)" i wgraj plik
+   ui\assets\zorza-logo.png  – nazwij go dokładnie:  logo
+5. W launcher.py wklej ID tutaj:   DISCORD_APP_ID = "tu-wklej-id"
+6. Uruchom Discorda na komputerze, potem launcher. Status widać w Ustawieniach.
+Przycisk "Pobierz Zora Client" widzą inni – ty sam na swoim profilu go nie zobaczysz.
+
+
+MOD ZORZA CLIENT (W GRZE)
+-------------------------
+Instaluje się sam w profilach Fabric 1.21.4 (razem z modami wbudowanymi).
+- Prawy Shift: menu z logo -> "Zorza Settings" (Mod Menu), edytor HUD, motyw, ustawienia gry.
+- Mod Menu: kategorie (HUD, Combat, Utility, Client), wyszukiwarka, ulubione (serduszko),
+  ⚙ przy module = ustawienia, przycisk Enabled/Disabled = włącz/wyłącz.
+- Edytor HUD: przeciągnij element, kółko myszy zmienia rozmiar, prawy przycisk resetuje.
+- Zoom: przytrzymaj C. Klawisze zmienisz w grze: Opcje -> Sterowanie -> Zora Client.
+Kod moda jest w folderze mod/. Po każdej zmianie GitHub sam go kompiluje i wystawia
+w wydaniu "mod-latest" – launcher pobiera nową wersję raz dziennie.
+
+GRAJ PRZEZ OFICJALNY LAUNCHER
+-----------------------------
+Strzałka obok "Graj" -> "Graj przez oficjalny launcher" (albo przycisk na stronie profilu).
+Zorza dodaje do oficjalnego launchera profil "Zorza – <nazwa>" z Fabricem, modami i folderem
+profilu Zorzy, i otwiera launcher. Wybierz ten profil i kliknij Graj (potrzebne kupione Minecraft).
+Kopia poprzedniego pliku profili: .minecraft\launcher_profiles.json.zorza-kopia

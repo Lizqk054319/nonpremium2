@@ -1,0 +1,98 @@
+name: Build Zora Client mod
+
+on:
+  push:
+    paths:
+      - "mod/**"
+      - ".github/workflows/mod.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.12"
+      - name: Build
+        working-directory: mod
+        run: gradle build --no-daemon --stacktrace
+      - name: Prepare jar
+        run: |
+          VER=$(grep '^mod_version=' mod/gradle.properties | cut -d= -f2)
+          MC=$(grep '^minecraft_version=' mod/gradle.properties | cut -d= -f2)
+          cp "mod/build/libs/zorza-client-${VER}.jar" "zorza-client-${MC}.jar"
+          echo "JAR=zorza-client-${MC}.jar" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zorza-client
+          path: ${{ env.JAR }}
+
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.12"
+      - name: Install virtual display
+        run: sudo apt-get update && sudo apt-get install -y xvfb mesa-utils libgl1-mesa-dri
+      - name: Run Minecraft and take screenshots
+        working-directory: mod
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: xvfb-run -a -s "-screen 0 1920x1080x24" gradle runClientGameTest --no-daemon --stacktrace
+      - name: Push screenshots to branch ci-screenshots
+        if: always()
+        run: |
+          mkdir -p /tmp/shots
+          find ~/.gradle/caches/fabric-loom mod/.gradle -name "*.jar" 2>/dev/null | grep -i "minecraft-" | grep -iv "sources\|intermediary\|official" | head -20 > /tmp/shots/jars.txt || true
+          J=$(grep -i "yarn\|named" /tmp/shots/jars.txt | grep -i "client\|merged" | head -1)
+          if [ -n "$J" ]; then javap -p -c -cp "$J" net.minecraft.client.gui.DrawContext 2>/dev/null | grep -E "^  (public|private|protected).*\(|drawText|getWidth" > /tmp/shots/drawcontext.txt || true; fi
+          cp -r mod/build/run/clientGameTest/screenshots/. /tmp/shots/ 2>/dev/null || true
+          cp -r mod/run/screenshots/. /tmp/shots/ 2>/dev/null || true
+          cp mod/build/run/clientGameTest/logs/latest.log /tmp/shots/ 2>/dev/null || cp mod/run/logs/latest.log /tmp/shots/ 2>/dev/null || true
+          cd /tmp/shots && git init -q -b ci-screenshots && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "screenshots ${GITHUB_SHA}" || exit 0
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: |
+            mod/build/run/clientGameTest/screenshots/
+            mod/run/screenshots/
+            mod/build/run/clientGameTest/logs/latest.log
+            mod/run/logs/latest.log
+          if-no-files-found: warn
+
+  # Wydanie tylko wtedy, gdy gra uruchomiła się z modem bez błędów
+  publish:
+    needs: [build, screenshots]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: zorza-client
+      - name: Publish release "mod-latest"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          JAR=$(ls zorza-client-*.jar | head -1)
+          gh release delete mod-latest --yes --cleanup-tag || true
+          gh release create mod-latest "$JAR" --title "Zora Client mod (najnowszy)" \
+            --notes "Automatycznie zbudowany mod Zora Client. Launcher pobiera go sam." --target "$GITHUB_SHA"
