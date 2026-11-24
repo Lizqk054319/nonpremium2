@@ -1,0 +1,103 @@
+  private net.minecraft.client.gui.DrawContext(net.minecraft.client.MinecraftClient, net.minecraft.client.util.math.MatrixStack, net.minecraft.client.render.VertexConsumerProvider$Immediate);
+  public net.minecraft.client.gui.DrawContext(net.minecraft.client.MinecraftClient, net.minecraft.client.render.VertexConsumerProvider$Immediate);
+  public int getScaledWindowWidth();
+  public int getScaledWindowHeight();
+  public net.minecraft.client.util.math.MatrixStack getMatrices();
+  public void draw();
+  public void drawHorizontalLine(int, int, int, int);
+  public void drawHorizontalLine(net.minecraft.client.render.RenderLayer, int, int, int, int);
+  public void drawVerticalLine(int, int, int, int);
+  public void drawVerticalLine(net.minecraft.client.render.RenderLayer, int, int, int, int);
+  public void enableScissor(int, int, int, int);
+  public void disableScissor();
+  public boolean scissorContains(int, int);
+  private void setScissor(net.minecraft.client.gui.ScreenRect);
+  public void fill(int, int, int, int, int);
+  public void fill(int, int, int, int, int, int);
+  public void fill(net.minecraft.client.render.RenderLayer, int, int, int, int, int);
+  public void fill(net.minecraft.client.render.RenderLayer, int, int, int, int, int, int);
+  public void fillGradient(int, int, int, int, int, int);
+  public void fillGradient(int, int, int, int, int, int, int);
+  public void fillGradient(net.minecraft.client.render.RenderLayer, int, int, int, int, int, int, int);
+  private void fillGradient(net.minecraft.client.render.VertexConsumer, int, int, int, int, int, int, int);
+  public void fillWithLayer(net.minecraft.client.render.RenderLayer, int, int, int, int, int);
+  public void drawCenteredTextWithShadow(net.minecraft.client.font.TextRenderer, java.lang.String, int, int, int);
+       6: invokevirtual #294                // Method net/minecraft/client/font/TextRenderer.getWidth:(Ljava/lang/String;)I
+      16: invokevirtual #298                // Method drawTextWithShadow:(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;III)I
+  public void drawCenteredTextWithShadow(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int, int);
+      16: invokevirtual #310                // Method net/minecraft/client/font/TextRenderer.getWidth:(Lnet/minecraft/text/OrderedText;)I
+      26: invokevirtual #313                // Method drawTextWithShadow:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;III)I
+  public void drawCenteredTextWithShadow(net.minecraft.client.font.TextRenderer, net.minecraft.text.OrderedText, int, int, int);
+       6: invokevirtual #310                // Method net/minecraft/client/font/TextRenderer.getWidth:(Lnet/minecraft/text/OrderedText;)I
+      16: invokevirtual #313                // Method drawTextWithShadow:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;III)I
+  public int drawTextWithShadow(net.minecraft.client.font.TextRenderer, java.lang.String, int, int, int);
+       9: invokevirtual #321                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I
+  public int drawText(net.minecraft.client.font.TextRenderer, java.lang.String, int, int, int, boolean);
+  public int drawTextWithShadow(net.minecraft.client.font.TextRenderer, net.minecraft.text.OrderedText, int, int, int);
+       9: invokevirtual #334                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;IIIZ)I
+  public int drawText(net.minecraft.client.font.TextRenderer, net.minecraft.text.OrderedText, int, int, int, boolean);
+  public int drawTextWithShadow(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int, int);
+       9: invokevirtual #341                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIIZ)I
+  public int drawText(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int, int, boolean);
+      15: invokevirtual #334                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;IIIZ)I
+  public void drawWrappedTextWithShadow(net.minecraft.client.font.TextRenderer, net.minecraft.text.StringVisitable, int, int, int, int);
+  public void drawWrappedText(net.minecraft.client.font.TextRenderer, net.minecraft.text.StringVisitable, int, int, int, int, boolean);
+      47: invokevirtual #334                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;IIIZ)I
+  public int drawTextWithBackground(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int, int, int);
+      66: invokevirtual #341                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIIZ)I
+  public void drawBorder(int, int, int, int, int);
+  public void drawGuiTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, int, int);
+  public void drawGuiTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, int, int, int);
+  public void drawGuiTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, int, int, int, int, int, int);
+  public void drawSpriteStretched(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Sprite, int, int, int, int);
+  public void drawSpriteStretched(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Sprite, int, int, int, int, int);
+      47: invokevirtual #481                // Method drawTexturedQuad:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
+  private void drawSpriteRegion(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Sprite, int, int, int, int, int, int, int, int, int);
+      81: invokevirtual #481                // Method drawTexturedQuad:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
+  private void drawSpriteNineSliced(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Sprite, net.minecraft.client.texture.Scaling$NineSlice, int, int, int, int, int);
+  private void drawInnerSprite(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Scaling$NineSlice, net.minecraft.client.texture.Sprite, int, int, int, int, int, int, int, int, int, int, int);
+      90: invokevirtual #481                // Method drawTexturedQuad:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
+  private void drawSpriteTiled(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.client.texture.Sprite, int, int, int, int, int, int, int, int, int, int, int);
+  public void drawTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, float, float, int, int, int, int, int);
+      24: invokevirtual #548                // Method drawTexture:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIFFIIIIIII)V
+  public void drawTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, float, float, int, int, int, int);
+      22: invokevirtual #553                // Method drawTexture:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIFFIIIIII)V
+  public void drawTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, float, float, int, int, int, int, int, int);
+      23: invokevirtual #548                // Method drawTexture:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIFFIIIIIII)V
+  public void drawTexture(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, float, float, int, int, int, int, int, int, int);
+      53: invokevirtual #481                // Method drawTexturedQuad:(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
+  private void drawTexturedQuad(java.util.function.Function<net.minecraft.util.Identifier, net.minecraft.client.render.RenderLayer>, net.minecraft.util.Identifier, int, int, int, int, float, float, float, float, int);
+  public void drawItem(net.minecraft.item.ItemStack, int, int);
+  public void drawItem(net.minecraft.item.ItemStack, int, int, int);
+  public void drawItem(net.minecraft.item.ItemStack, int, int, int, int);
+  public void drawItemWithoutEntity(net.minecraft.item.ItemStack, int, int);
+  public void drawItemWithoutEntity(net.minecraft.item.ItemStack, int, int, int);
+  public void drawItem(net.minecraft.entity.LivingEntity, net.minecraft.item.ItemStack, int, int, int);
+  private void drawItem(net.minecraft.entity.LivingEntity, net.minecraft.world.World, net.minecraft.item.ItemStack, int, int, int);
+  private void drawItem(net.minecraft.entity.LivingEntity, net.minecraft.world.World, net.minecraft.item.ItemStack, int, int, int, int);
+  public void drawStackOverlay(net.minecraft.client.font.TextRenderer, net.minecraft.item.ItemStack, int, int);
+  public void drawStackOverlay(net.minecraft.client.font.TextRenderer, net.minecraft.item.ItemStack, int, int, java.lang.String);
+  public void drawItemTooltip(net.minecraft.client.font.TextRenderer, net.minecraft.item.ItemStack, int, int);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.text.Text>, java.util.Optional<net.minecraft.item.tooltip.TooltipData>, int, int);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.text.Text>, java.util.Optional<net.minecraft.item.tooltip.TooltipData>, int, int, net.minecraft.util.Identifier);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, net.minecraft.text.Text, int, int, net.minecraft.util.Identifier);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.text.Text>, int, int);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.text.Text>, int, int, net.minecraft.util.Identifier);
+  public void drawOrderedTooltip(net.minecraft.client.font.TextRenderer, java.util.List<? extends net.minecraft.text.OrderedText>, int, int);
+  public void drawOrderedTooltip(net.minecraft.client.font.TextRenderer, java.util.List<? extends net.minecraft.text.OrderedText>, int, int, net.minecraft.util.Identifier);
+  public void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.text.OrderedText>, net.minecraft.client.gui.tooltip.TooltipPositioner, int, int);
+  private void drawTooltip(net.minecraft.client.font.TextRenderer, java.util.List<net.minecraft.client.gui.tooltip.TooltipComponent>, int, int, net.minecraft.client.gui.tooltip.TooltipPositioner, net.minecraft.util.Identifier);
+      64: invokeinterface #888,  2          // InterfaceMethod net/minecraft/client/gui/tooltip/TooltipComponent.getWidth:(Lnet/minecraft/client/font/TextRenderer;)I
+     241: invokeinterface #919,  6          // InterfaceMethod net/minecraft/client/gui/tooltip/TooltipComponent.drawText:(Lnet/minecraft/client/font/TextRenderer;IILorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider$Immediate;)V
+  private void drawItemBar(net.minecraft.item.ItemStack, int, int);
+  private void drawStackCount(net.minecraft.client.font.TextRenderer, net.minecraft.item.ItemStack, int, int, java.lang.String);
+      64: invokevirtual #294                // Method net/minecraft/client/font/TextRenderer.getWidth:(Ljava/lang/String;)I
+      77: invokevirtual #321                // Method drawText:(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I
+  private void drawCooldownProgress(net.minecraft.item.ItemStack, int, int);
+  public void drawHoverEvent(net.minecraft.client.font.TextRenderer, net.minecraft.text.Style, int, int);
+  public void draw(java.util.function.Consumer<net.minecraft.client.render.VertexConsumerProvider>);
+  private static void method_51442(java.util.List, net.minecraft.item.tooltip.TooltipData);
+  private static java.lang.String method_57708(net.minecraft.item.ItemStack) throws java.lang.Exception;
+  private static java.lang.String method_51449(net.minecraft.item.ItemStack) throws java.lang.Exception;
+  private static java.lang.String method_51451(net.minecraft.item.ItemStack) throws java.lang.Exception;
